@@ -20,7 +20,8 @@ var parseFile = function(data, callback){
 			if(num_tabs > previous_line){
 				html += '\n' + insertTabs(num_tabs) +'<li><ul>';
 			}
-			html += '\n' + insertTabs(num_tabs+1) + '<li>' + split_value[split_value.length-1] + '</li>';
+			html += '\n' + insertTabs(num_tabs+1) + 
+				'<li>' + split_value[split_value.length-1] + '</li>';
 			previous_line = num_tabs;
 		}
 	});
