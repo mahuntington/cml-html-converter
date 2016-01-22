@@ -30,8 +30,8 @@ var parseFile = function(data, callback){
 			var split_value = value.split('\t');
 			var num_tabs = split_value.length - 1;
 			if(num_tabs > previous_line){
-				html += '\n' + insertTabs(num_tabs) +'<li><ul>';
-				tabStack.push('\n' + insertTabs(num_tabs) + '</ul></li>');
+				html += '\n' + insertTabs(num_tabs) +'<li>\n' + insertTabs(num_tabs+1) + '<ul>';
+				tabStack.push('\n' + insertTabs(num_tabs+1) + '</ul>\n' + insertTabs(num_tabs) + '</li>');
 			}
 			else if(num_tabs < previous_line){
 				html += popTabStack(tabStack);
