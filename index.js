@@ -1,5 +1,5 @@
 fs = require('fs');
-module.exports = function(callback){
+module.exports = function(file_path, callback){
 
 	var insertTabs = function(num_tabs) {
 		var result = '';
@@ -56,7 +56,7 @@ module.exports = function(callback){
 		callback(html);
 	}
 	//fs.readFile(process.argv[2], 'utf8', function(err, data){
-	fs.readFile('test.txt', 'utf8', function(err, data){
+	fs.readFile(file_path, 'utf8', function(err, data){
 		if(err){
 			console.log(err);
 		} else {
