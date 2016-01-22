@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 				}
 			},
 			all: {
-				files: ['**/*'],
+				files: ['**/*.txt'],
 				tasks: ['convert-tabs-to-html']
 			}
 		}
