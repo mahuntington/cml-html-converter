@@ -9,22 +9,33 @@ var insertTabs = function(num_tabs) {
 	return result;
 }
 
+var emptyTabStack = function(tabStack){
+	var result = '';
+	while(tabStack.length > 0){
+		result += tabStack.pop();
+	}
+	return result;
+}
+
 var parseFile = function(data, callback){
 	var previous_line = -1;
 	var lines = data.split('\n');
 	var html = '';
+	var tabStack = [];
 	lines.forEach(function(value, index){
 		if(value !== ''){
 			var split_value = value.split('\t');
 			var num_tabs = split_value.length - 1;
 			if(num_tabs > previous_line){
 				html += '\n' + insertTabs(num_tabs) +'<li><ul>';
+				tabStack.push('\n' + insertTabs(num_tabs) + '</ul></li>');
 			}
 			html += '\n' + insertTabs(num_tabs+1) + 
 				'<li>' + split_value[split_value.length-1] + '</li>';
 			previous_line = num_tabs;
 		}
 	});
+	html += emptyTabStack(tabStack);
 	callback(html);
 }
 
