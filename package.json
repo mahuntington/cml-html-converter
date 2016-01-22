@@ -1,0 +1,19 @@
+{
+  "name": "tab-html-converter",
+  "version": "0.0.0",
+  "description": "Convert Notes To HTML",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://matt@ubuntu-powrpc/~/drive/git/tab_html_converter"
+  },
+  "keywords": [
+    "HTML",
+    "Notes"
+  ],
+  "author": "Matt Huntington",
+  "license": "MIT"
+}
