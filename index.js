@@ -18,7 +18,7 @@ var parseFile = function(data, callback){
 			var split_value = value.split('\t');
 			var num_tabs = split_value.length - 1;
 			if(num_tabs > previous_line){
-				html += "\n" + insertTabs(num_tabs) +"<li><ul>";
+				html += '\n' + insertTabs(num_tabs) +'<li><ul>';
 			}
 			html += '\n' + insertTabs(num_tabs+1) + '<li>' + split_value[split_value.length-1] + '</li>';
 			previous_line = num_tabs;
