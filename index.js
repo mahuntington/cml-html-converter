@@ -34,14 +34,8 @@ module.exports = function(file_path, callback){
 				var split_value = value.split('\t');
 				var num_tabs = split_value.length - 1;
 				if(num_tabs > previous_line){
-					if(num_tabs > 0){
-						html += '\n' + insertTabs(num_tabs * 2 - 1) +'<li>\n';
-					}
-					html += insertTabs(num_tabs * 2) + '<ul>';
+					html += '\n' + insertTabs(num_tabs * 2) + '<ul>';
 					var html_push_string = '\n' + insertTabs(num_tabs * 2) + '</ul>';
-					if(num_tabs > 0){
-						html_push_string += '\n' + insertTabs(num_tabs * 2 - 1) + '</li>';
-					}
 					tabStack.push(html_push_string);
 				}
 				else if(num_tabs < previous_line){
