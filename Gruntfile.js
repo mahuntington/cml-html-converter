@@ -10,12 +10,15 @@ module.exports = function(grunt) {
 			},
 			all: {
 				files: ['**/*'],
-				tasks: []
+				tasks: ['convert-tabs-to-html']
 			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('convert-tabs-to-html', function(){
+		console.log('hi');	
+	});
 
 };
