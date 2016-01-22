@@ -16,6 +16,9 @@ var emptyTabStack = function(tabStack){
 	}
 	return result;
 }
+var popTabStack = function(tabStack){
+	return tabStack.pop();
+}
 
 var parseFile = function(data, callback){
 	var previous_line = -1;
@@ -29,6 +32,9 @@ var parseFile = function(data, callback){
 			if(num_tabs > previous_line){
 				html += '\n' + insertTabs(num_tabs) +'<li><ul>';
 				tabStack.push('\n' + insertTabs(num_tabs) + '</ul></li>');
+			}
+			else if(num_tabs < previous_line){
+				html += popTabStack(tabStack);
 			}
 			html += '\n' + insertTabs(num_tabs+1) + 
 				'<li>' + split_value[split_value.length-1] + '</li>';
