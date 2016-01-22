@@ -55,15 +55,11 @@ module.exports = function(file_path, callback){
 		html += emptyTabStack(tabStack);
 		callback(html);
 	}
-	//fs.readFile(process.argv[2], 'utf8', function(err, data){
 	fs.readFile(file_path, 'utf8', function(err, data){
 		if(err){
 			console.log(err);
 		} else {
 			parseFile(data, function(html){
-				//console.log('<html><head></head><body>');
-				//console.log(html);
-				//console.log('</body></html>');
 				var result = '<html><head></head><body>';
 				result += html;
 				result += '</body></html>';
