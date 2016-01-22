@@ -16,8 +16,12 @@ var emptyTabStack = function(tabStack){
 	}
 	return result;
 }
-var popTabStack = function(tabStack){
-	return tabStack.pop();
+var popTabStack = function(tabStack, current_line_num_tabs, previous_line_num_tabs){
+	var result = '';
+	for(var i = previous_line_num_tabs; i > current_line_num_tabs; i--){
+		result += tabStack.pop();
+	}
+	return result;
 }
 
 var parseFile = function(data, callback){
@@ -30,14 +34,14 @@ var parseFile = function(data, callback){
 			var split_value = value.split('\t');
 			var num_tabs = split_value.length - 1;
 			if(num_tabs > previous_line){
-				html += '\n' + insertTabs(num_tabs) +'<li>\n' + insertTabs(num_tabs+1) + '<ul>';
-				tabStack.push('\n' + insertTabs(num_tabs+1) + '</ul>\n' + insertTabs(num_tabs) + '</li>');
+				html += '\n' + insertTabs(num_tabs * 2) +'<li>\n' + insertTabs(num_tabs * 2 + 1) + '<ul>';
+				tabStack.push('\n' + insertTabs(num_tabs * 2 + 1) + '</ul>\n' + insertTabs(num_tabs * 2) + '</li>');
 			}
 			else if(num_tabs < previous_line){
-				html += popTabStack(tabStack);
+				html += popTabStack(tabStack, num_tabs, previous_line);
 			}
-			html += '\n' + insertTabs(num_tabs+1) + 
-				'<li>' + split_value[split_value.length-1] + '</li>';
+			html += '\n' + insertTabs(num_tabs * 2 + 2) + 
+				'<li>' + split_value[split_value.length - 1] + '</li>';
 			previous_line = num_tabs;
 		}
 	});
