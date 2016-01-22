@@ -1,4 +1,4 @@
-fs = require('fs');
+var fs = require('fs');
 module.exports = function(file_path, callback){
 
 	var insertTabs = function(num_tabs) {
