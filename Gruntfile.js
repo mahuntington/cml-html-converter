@@ -1,3 +1,4 @@
+var converter = require('./index.js');
 module.exports = function(grunt) {
 
 	grunt.initConfig({
@@ -18,7 +19,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('convert-tabs-to-html', function(){
-		console.log('hi');	
+		var done = this.async();
+		converter(function(result){
+			console.log(result);
+			done();
+		});
 	});
 
 };
