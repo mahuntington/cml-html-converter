@@ -49,21 +49,6 @@ module.exports = function(file_path, callback){
 				previous_line_num_tabs = current_line_num_tabs;
 			}
 		}
-/*		lines.forEach(function(value, index){
-			if(value !== ''){
-				var split_value = value.split('\t');
-				var num_tabs = split_value.length - 1;
-				if(num_tabs > previous_line){
-					html += '\n' + insertTabs(num_tabs * 2) + '<ul>';
-					var html_push_string = '\n' + insertTabs(num_tabs * 2) + '</ul>';
-					tabStack.push(html_push_string);
-				}
-				html += '\n' + insertTabs(num_tabs * 2 + 1) + 
-					'<li>' + split_value[split_value.length - 1] + '</li>';
-				previous_line = num_tabs;
-			}
-		});
-*/		
 		html += emptyHTMLStack(html_stack);
 		callback(html);
 	}
