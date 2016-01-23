@@ -9,10 +9,10 @@ module.exports = function(file_path, callback){
 		return result;
 	}
 
-	var emptyTabStack = function(tabStack){
+	var emptyHTMLStack = function(html_stack){
 		var result = '';
-		while(tabStack.length > 0){
-			result += tabStack.pop();
+		while(html_stack.length > 0){
+			result += html_stack.pop();
 		}
 		return result;
 	}
@@ -25,11 +25,28 @@ module.exports = function(file_path, callback){
 	}
 
 	var parseFile = function(data, callback){
-		var previous_line = -1;
+		var previous_line_num_tabs = -1;
 		var lines = data.split('\n');
 		var html = '';
-		var tabStack = [];
-		lines.forEach(function(value, index){
+		var html_stack = [];
+		for(var i = 0; i < lines.length; i++){
+			if(lines[i] !== ''){
+				console.log(i + lines[i]);
+				var tabs_array = lines[i].split('\t');
+				var current_line_num_tabs = tabs_array.length - 1;
+				if(current_line_num_tabs > previous_line_num_tabs){
+					html += insertTabs(current_line_num_tabs * 3) + '<ul>\n';
+					html_stack.push( insertTabs(current_line_num_tabs * 3) + '</ul>\n');
+				} else if (current_line_num_tabs === previous_line_num_tabs) {
+					html += html_stack.pop();
+				}
+				html += insertTabs((current_line_num_tabs * 3) + 1) + '<li>\n';
+				html += insertTabs((current_line_num_tabs * 3) + 2) + lines[i] + '\n';
+				html_stack.push(insertTabs((current_line_num_tabs * 3) + 1) + '</li>\n');
+				previous_line_num_tabs = current_line_num_tabs;
+			}
+		}
+/*		lines.forEach(function(value, index){
 			if(value !== ''){
 				var split_value = value.split('\t');
 				var num_tabs = split_value.length - 1;
@@ -46,7 +63,8 @@ module.exports = function(file_path, callback){
 				previous_line = num_tabs;
 			}
 		});
-		html += emptyTabStack(tabStack);
+*/		
+		html += emptyHTMLStack(html_stack);
 		callback(html);
 	}
 	fs.readFile(file_path, 'utf8', function(err, data){
@@ -54,7 +72,7 @@ module.exports = function(file_path, callback){
 			console.log(err);
 		} else {
 			parseFile(data, function(html){
-				var result = '<html><head></head><body>';
+				var result = '<html><head></head><body>\n';
 				result += html;
 				result += '</body></html>';
 				callback(result);

@@ -1,9 +1,3 @@
-this is a sentence
-	this is a new line
-		even further
-		same
-			one more line
-			again
-			weeeeee
-				further indent
-	back a line
+first line
+second line
+third line
