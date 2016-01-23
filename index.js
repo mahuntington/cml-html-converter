@@ -47,12 +47,11 @@ module.exports = function(input, callback){
 			}
 		}
 		html += popHTMLStack(-1, previous_line_num_tabs); 
-		callback(html);
+		return html
 	}
-	parseFile(input, function(html){
-		var result = '<html><head></head><body>\n';
-		result += html;
-		result += '</body></html>';
-		callback(result);
-	});
+	
+	var result = '<html><head></head><body>\n';
+	result += parseFile(input);
+	result += '</body></html>';
+	return result;
 };

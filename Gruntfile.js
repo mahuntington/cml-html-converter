@@ -22,11 +22,9 @@ module.exports = function(grunt) {
 	grunt.registerTask('convert-tabs-to-html', function(){
 		var done = this.async();
 		fs.readFile('test.txt', 'utf8', function(err, data){
-			converter(data, function(result){
-				console.log(result);
-				fs.writeFile('result.html', result, function(){
-					done();
-				});
+			var html = converter(data);
+			fs.writeFile('result.html', html, function(){
+				done();
 			});
 		});
 	});
