@@ -2,4 +2,8 @@ first line
 second line
 	third line indented once
 		indented twice
-	last line indented once
+		twice again
+			thrice
+				frice
+			back once
+	last line back indented twice 

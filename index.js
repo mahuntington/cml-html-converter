@@ -17,9 +17,8 @@ module.exports = function(file_path, callback){
 		return result;
 	}
 	var popHTMLStack = function(html_stack, current_line_num_tabs, previous_line_num_tabs){
-		var result = '';
+		var result = html_stack.pop();
 		for(var i = previous_line_num_tabs; i > current_line_num_tabs; i--){
-			result += html_stack.pop();
 			result += html_stack.pop();
 			result += html_stack.pop();
 		}
