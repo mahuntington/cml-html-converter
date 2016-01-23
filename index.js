@@ -1,5 +1,5 @@
 var fs = require('fs');
-module.exports = function(input, callback){
+module.exports = function(input){
 
 	var html_stack = [];
 
@@ -23,7 +23,7 @@ module.exports = function(input, callback){
 		return result;
 	}
 
-	var parseFile = function(data, callback){
+	var parseFile = function(data){
 		var previous_line_num_tabs = -1;
 		var lines = data.split('\n');
 		var html = '';
