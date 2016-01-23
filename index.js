@@ -35,14 +35,14 @@ module.exports = function(file_path, callback){
 				var tabs_array = lines[i].split('\t');
 				var current_line_num_tabs = tabs_array.length - 1;
 				if(current_line_num_tabs > previous_line_num_tabs){
-					html += insertTabs(current_line_num_tabs * 3) + '<ul>\n';
-					html_stack.push( insertTabs(current_line_num_tabs * 3) + '</ul>\n');
+					html += insertTabs(current_line_num_tabs * 2) + '<ul>\n';
+					html_stack.push( insertTabs(current_line_num_tabs * 2) + '</ul>\n');
 				} else if (current_line_num_tabs === previous_line_num_tabs) {
 					html += html_stack.pop();
 				}
-				html += insertTabs((current_line_num_tabs * 3) + 1) + '<li>\n';
-				html += insertTabs((current_line_num_tabs * 3) + 2) + lines[i] + '\n';
-				html_stack.push(insertTabs((current_line_num_tabs * 3) + 1) + '</li>\n');
+				html += insertTabs((current_line_num_tabs * 2) + 1) + '<li>\n';
+				html += insertTabs((current_line_num_tabs * 2) + 2) + tabs_array[tabs_array.length - 1] + '\n';
+				html_stack.push(insertTabs((current_line_num_tabs * 2) + 1) + '</li>\n');
 				previous_line_num_tabs = current_line_num_tabs;
 			}
 		}
