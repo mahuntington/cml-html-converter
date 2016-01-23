@@ -1,3 +1,4 @@
 first line
 second line
-	third line
+	third line indented once
+		indented twice
