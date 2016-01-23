@@ -11,17 +11,13 @@ module.exports = function(file_path, callback){
 		return result;
 	}
 
-	var emptyHTMLStack = function(){
-		var result = '';
-		while(html_stack.length > 0){
-			result += html_stack.pop();
-		}
-		return result;
-	}
 	var popHTMLStack = function(current_line_num_tabs, previous_line_num_tabs){
-		var result = html_stack.pop();
+		var result = ''; 
 		for(var i = previous_line_num_tabs; i > current_line_num_tabs; i--){
 			result += html_stack.pop();
+			result += html_stack.pop();
+		}
+		if(html_stack.length > 0){
 			result += html_stack.pop();
 		}
 		return result;
@@ -50,7 +46,7 @@ module.exports = function(file_path, callback){
 				previous_line_num_tabs = current_line_num_tabs;
 			}
 		}
-		html += emptyHTMLStack();
+		html += popHTMLStack(-1, previous_line_num_tabs); 
 		callback(html);
 	}
 	fs.readFile(file_path, 'utf8', function(err, data){
