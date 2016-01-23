@@ -6,4 +6,5 @@ second line
 			thrice
 				frice
 			back once
-	last line back indented twice 
+	last line back indented twice
+final
