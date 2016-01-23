@@ -1,18 +1,17 @@
 {
-  "name": "tab-html-converter",
+  "name": "cml-html-converter",
   "version": "0.0.0",
-  "description": "Convert Notes To HTML",
+  "description": "Convert CML To HTML",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://matt@ubuntu-powrpc/~/drive/git/tab_html_converter"
+    "url": "https://github.com/mahuntington/cml-html-converter.git"
   },
   "keywords": [
-    "HTML",
-    "Notes"
+    "CML"
   ],
   "author": "Matt Huntington",
   "license": "MIT",
