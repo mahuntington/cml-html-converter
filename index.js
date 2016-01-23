@@ -1,5 +1,5 @@
 var fs = require('fs');
-module.exports = function(file_path, callback){
+module.exports = function(input, callback){
 
 	var html_stack = [];
 
@@ -49,16 +49,10 @@ module.exports = function(file_path, callback){
 		html += popHTMLStack(-1, previous_line_num_tabs); 
 		callback(html);
 	}
-	fs.readFile(file_path, 'utf8', function(err, data){
-		if(err){
-			console.log(err);
-		} else {
-			parseFile(data, function(html){
-				var result = '<html><head></head><body>\n';
-				result += html;
-				result += '</body></html>';
-				callback(result);
-			});
-		}
+	parseFile(input, function(html){
+		var result = '<html><head></head><body>\n';
+		result += html;
+		result += '</body></html>';
+		callback(result);
 	});
 };

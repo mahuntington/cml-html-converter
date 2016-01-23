@@ -21,10 +21,12 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('convert-tabs-to-html', function(){
 		var done = this.async();
-		converter('test.txt', function(result){
-			console.log(result);
-			fs.writeFile('result.html', result, function(){
-				done();
+		fs.readFile('test.txt', 'utf8', function(err, data){
+			converter(data, function(result){
+				console.log(result);
+				fs.writeFile('result.html', result, function(){
+					done();
+				});
 			});
 		});
 	});
