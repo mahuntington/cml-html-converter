@@ -47,8 +47,5 @@ module.exports = function(input, callback){
 		return html
 	}
 	
-	var result = '<html><head></head><body>\n';
-	result += parseFile(input);
-	result += '</body></html>';
-	return result;
+	return parseFile(input);
 };
