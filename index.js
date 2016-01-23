@@ -1,6 +1,8 @@
 var fs = require('fs');
 module.exports = function(file_path, callback){
 
+	var html_stack = [];
+
 	var insertTabs = function(num_tabs) {
 		var result = '';
 		for(var i  = 0; i < num_tabs; i++){
@@ -9,14 +11,14 @@ module.exports = function(file_path, callback){
 		return result;
 	}
 
-	var emptyHTMLStack = function(html_stack){
+	var emptyHTMLStack = function(){
 		var result = '';
 		while(html_stack.length > 0){
 			result += html_stack.pop();
 		}
 		return result;
 	}
-	var popHTMLStack = function(html_stack, current_line_num_tabs, previous_line_num_tabs){
+	var popHTMLStack = function(current_line_num_tabs, previous_line_num_tabs){
 		var result = html_stack.pop();
 		for(var i = previous_line_num_tabs; i > current_line_num_tabs; i--){
 			result += html_stack.pop();
@@ -29,7 +31,6 @@ module.exports = function(file_path, callback){
 		var previous_line_num_tabs = -1;
 		var lines = data.split('\n');
 		var html = '';
-		var html_stack = [];
 		for(var i = 0; i < lines.length; i++){
 			if(lines[i] !== ''){
 				var tabs_array = lines[i].split('\t');
@@ -41,7 +42,7 @@ module.exports = function(file_path, callback){
 					html += html_stack.pop();
 				}
 				else if(current_line_num_tabs < previous_line_num_tabs){
-					html += popHTMLStack(html_stack, current_line_num_tabs, previous_line_num_tabs);
+					html += popHTMLStack(current_line_num_tabs, previous_line_num_tabs);
 				}
 				html += insertTabs((current_line_num_tabs * 2) + 1) + '<li>\n';
 				html += insertTabs((current_line_num_tabs * 2) + 2) + tabs_array[tabs_array.length - 1] + '\n';
@@ -49,7 +50,7 @@ module.exports = function(file_path, callback){
 				previous_line_num_tabs = current_line_num_tabs;
 			}
 		}
-		html += emptyHTMLStack(html_stack);
+		html += emptyHTMLStack();
 		callback(html);
 	}
 	fs.readFile(file_path, 'utf8', function(err, data){
