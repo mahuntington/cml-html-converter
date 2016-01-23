@@ -2,3 +2,4 @@ first line
 second line
 	third line indented once
 		indented twice
+	last line indented once
