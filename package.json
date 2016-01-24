@@ -13,7 +13,7 @@
   "keywords": [
     "CML"
   ],
-  "readme": "README.md"
+  "readme": "README.md",
   "author": "Matt Huntington",
   "license": "MIT",
   "dependencies": {}
