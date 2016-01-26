@@ -57,5 +57,5 @@ module.exports = function(input){
 		return html
 	}
 	
-	return parseFile(input);
+	return parseFile(input).trim();
 };
