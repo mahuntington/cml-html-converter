@@ -55,6 +55,7 @@ module.exports = function(input){
 			}
 		}
 		html += popHTMLStack(-1, previous_line_num_tabs); 
+		html = html.replace(/(http:\/\/[^\s<]*)/g, '<a href="$1">$1</a>');
 		previous_line_num_tabs = -1;
 		return html
 	}
