@@ -31,7 +31,9 @@ module.exports = function(input){
 				if(lines[ i + 1 ] === '' && (i === 0 || lines[ i - 1 ] === '')){
 					html += popHTMLStack(-1, previous_line_num_tabs); 
 					previous_line_num_tabs = -1;
-					if( i > 0 ) {
+					if(lines[i].indexOf('.') > 0){
+						html += '<p>' + lines[i] + '</p>\n';
+					} else if( i > 0 ) {
 						html += '<h2>' + lines[i] + '</h2>\n';
 					} else {
 						html += '<h1>' + lines[i] + '</h1>\n';
