@@ -10,32 +10,74 @@ This NPM library is just a single function that implements the CML spec by conve
 - Install it using NPM: `npm install cml-html-converter`
 - require the module, then call it.
 ```javascript
-	var converter = require('cml-html-converter');
-	var exampleCMLString = 
-		'item one of root list\n' + //no indentation
-		'\titem one of 1st nested list\n' + //indented once
-		'\t\titem one of 2nd nested list\n' + //indented twice
-		'\titem two of 1st nested list' //indented once
-	var htmlString = converter(exampleCMLString); 
+var converter = require('cml-html-converter');
+var exampleString = "if the first line contains a line break after it, it is rendered as a header\n" +
+"\n" +
+"sub headings are single lines that have a line break before and after them, but are not the first line\n" +
+"\n" +
+"This single line contains a period.  Therefore, it is rendered as a paragraph.  It also contains a link to http://www.google.com, so that is rendered appropriately.\n"+
+"\n" +
+"lines that either directly preceed another line of text\n" + 
+"	or directly succeed another line of text\n" +
+"		are rendered as lists\n" +
+"			they can also contain links http://www.google.com\n" +
+"				you can only forward indent\n" +
+"					one tab\n" + 
+"						at a\n" +
+"							time\n" +
+"				but you can back indent as much as you'd like\n" +
+"\n" +
+"sub heading 2\n";
+ub heading 2';
+var htmlString = converter(exampleCMLString); 
 ```
 - in the example above `htmlString` should look something like this:
 ```html
+<h1>if the first line contains a line break after it, it is rendered as a header</h1>
+<h2>sub headings are single lines that have a line break before and after them, but are not the first line</h2>
+<p>This single line contains a period.  Therefore, it is rendered as a paragraph.  It also contains a link to <a href="http://www.google.com">http://www.google.com</a>, so that is rendered appropriately.</p>
 <ul>
 	<li>
-		item one of root list
+		lines that either directly preceed another line of text
 		<ul>
 			<li>
-				item two of 1st nested list
+				or directly succeed another line of text
 				<ul>
 					<li>
-						item one of 2nd nested list
+						are rendered as lists
+						<ul>
+							<li>
+								they can also contain links <a href="http://www.google.com">http://www.google.com</a>
+								<ul>
+									<li>
+										you can only forward indent
+										<ul>
+											<li>
+												one tab
+												<ul>
+													<li>
+														at a
+														<ul>
+															<li>
+																time
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li>
+										but you can back indent as much as you'd like
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</li>
 				</ul>
-			</li>
-			<li>
-				item two of 1st nested list
 			</li>
 		</ul>
 	</li>
 </ul>
+<h2>sub heading 2</h2>
 ```
