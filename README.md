@@ -8,7 +8,7 @@ This NPM library is just a single function that implements the CML spec by conve
 
 ## How do I use it?
 - Install it using NPM: `npm install cml-html-converter`
-- require the module, then call it.
+- require the module, then call it (example code is best read in github readme.  NPM has issues with tabs).
 ```javascript
 var converter = require('cml-html-converter');
 var exampleString = "if the first line contains a line break after it, it is rendered as a header\n" +
