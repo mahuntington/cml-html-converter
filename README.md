@@ -28,7 +28,6 @@ var exampleString = "if the first line contains a line break after it, it is ren
 "				but you can back indent as much as you'd like\n" +
 "\n" +
 "sub heading 2\n";
-ub heading 2';
 var htmlString = converter(exampleCMLString); 
 ```
 - in the example above `htmlString` should look something like this:
