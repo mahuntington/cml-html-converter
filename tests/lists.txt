@@ -1,0 +1,9 @@
+lines that either directly preceed another line of text
+	or directly succeed another line of text
+	are rendered as lists
+		they can also contain links http://www.google.com
+			you can only forward indent
+			one tab
+				at a
+			time
+	but you can back indent as much as you'd like
