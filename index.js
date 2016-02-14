@@ -1,6 +1,9 @@
 module.exports = function(input){
 
 	var html_stack = [];
+	var previous_line_num_tabs = -1;
+	var lines;
+	var html = '';
 
 	var insertTabs = function(num_tabs) {
 		var result = '';
@@ -22,10 +25,23 @@ module.exports = function(input){
 		return result;
 	}
 
+	var processList = function(i){
+		var tabs_array = lines[i].split('\t');
+		var current_line_num_tabs = tabs_array.length - 1;
+		if(current_line_num_tabs > previous_line_num_tabs){
+			html += insertTabs(current_line_num_tabs * 2) + '<ul>\n';
+			html_stack.push(insertTabs(current_line_num_tabs * 2) + '</ul>\n');
+		} else { 
+			html += popHTMLStack(current_line_num_tabs, previous_line_num_tabs);
+		}
+		html += insertTabs((current_line_num_tabs * 2) + 1) + '<li>\n';
+		html += insertTabs((current_line_num_tabs * 2) + 2) + tabs_array[tabs_array.length - 1] + '\n';
+		html_stack.push(insertTabs((current_line_num_tabs * 2) + 1) + '</li>\n');
+		previous_line_num_tabs = current_line_num_tabs;
+	}
+
 	var parseFile = function(data){
-		var previous_line_num_tabs = -1;
-		var lines = data.split('\n');
-		var html = '';
+		lines = data.split('\n');
 		for(var i = 0; i < lines.length; i++){
 			if(lines[i] !== ''){
 				if(lines[ i + 1 ] === '' && (i === 0 || lines[ i - 1 ] === '')){
@@ -39,18 +55,7 @@ module.exports = function(input){
 						html += '<h1>' + lines[i] + '</h1>\n';
 					}
 				} else {
-					var tabs_array = lines[i].split('\t');
-					var current_line_num_tabs = tabs_array.length - 1;
-					if(current_line_num_tabs > previous_line_num_tabs){
-						html += insertTabs(current_line_num_tabs * 2) + '<ul>\n';
-						html_stack.push(insertTabs(current_line_num_tabs * 2) + '</ul>\n');
-					} else { 
-						html += popHTMLStack(current_line_num_tabs, previous_line_num_tabs);
-					}
-					html += insertTabs((current_line_num_tabs * 2) + 1) + '<li>\n';
-					html += insertTabs((current_line_num_tabs * 2) + 2) + tabs_array[tabs_array.length - 1] + '\n';
-					html_stack.push(insertTabs((current_line_num_tabs * 2) + 1) + '</li>\n');
-					previous_line_num_tabs = current_line_num_tabs;
+					processList(i);
 				}
 			}
 		}
