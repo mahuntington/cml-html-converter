@@ -1,17 +1,25 @@
 var fs = require('fs');
 var converter = require('../index.js');
 
-describe("links", function () {
-  it("should render links", function (done) {
-    fs.readFile('tests/input/links.txt', 'utf8',function(err, input){
-      fs.readFile('tests/output/links.html', 'utf8',function(err, output){
+describe("parser", function () {
+  it("should render links in a list", function (done) {
+    fs.readFile('tests/input/links/list.txt', 'utf8',function(err, input){
+      fs.readFile('tests/output/links/list.html', 'utf8',function(err, output){
+        expect(converter(input)+'\n').toBe(output);
+        done();
+      });
+    });
+  });
+  it("should render links in a paragraph", function (done) {
+    fs.readFile('tests/input/links/paragraph.txt', 'utf8',function(err, input){
+      fs.readFile('tests/output/links/paragraph.html', 'utf8',function(err, output){
         expect(converter(input)+'\n').toBe(output);
         done();
       });
     });
   });
 });
-describe("lists", function () {
+describe("parser", function () {
   it("should render lists", function (done) {
     fs.readFile('tests/input/lists.txt', 'utf8',function(err, input){
       fs.readFile('tests/output/lists.html', 'utf8',function(err, output){
@@ -21,7 +29,7 @@ describe("lists", function () {
     });
   });
 });
-describe("single lines", function (done) {
+describe("parser", function (done) {
   it("should render paragraphs and headers", function (done) {
     fs.readFile('tests/input/single_lines.txt', 'utf8',function(err, input){
       fs.readFile('tests/output/single_lines.html', 'utf8',function(err, output){
