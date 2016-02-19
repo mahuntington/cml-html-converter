@@ -4,7 +4,7 @@
   "description": "Convert CML To HTML",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "nodemon --ignore coverage/ -q -x 'istanbul cover _mocha'"
   },
   "repository": {
     "type": "git",
